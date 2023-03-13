@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Get, Param } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, Put, Patch } from '@nestjs/common';
 
 @Controller('users')
 export class UserController {
@@ -15,5 +15,23 @@ export class UserController {
   @Get(':id')
   async readOne(@Param() params) {
     return { user: {}, params };
+  }
+
+  @Put(':id')
+  async update(@Body() body, @Param() params) {
+    return {
+      method: 'put',
+      body,
+      params
+    }
+  }
+
+  @Patch(':id')
+  async updatePartial(@Body() body, @Param() params) {
+    return {
+      method: 'patch',
+      body,
+      params
+    }
   }
 }

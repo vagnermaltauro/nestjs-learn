@@ -9,4 +9,14 @@ export declare class UserController {
         user: {};
         params: any;
     }>;
+    update(body: any, params: any): Promise<{
+        method: string;
+        body: any;
+        params: any;
+    }>;
+    updatePartial(body: any, params: any): Promise<{
+        method: string;
+        body: any;
+        params: any;
+    }>;
 }

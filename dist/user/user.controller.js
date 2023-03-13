@@ -24,6 +24,20 @@ let UserController = class UserController {
     async readOne(params) {
         return { user: {}, params };
     }
+    async update(body, params) {
+        return {
+            method: 'put',
+            body,
+            params
+        };
+    }
+    async updatePartial(body, params) {
+        return {
+            method: 'patch',
+            body,
+            params
+        };
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -45,6 +59,22 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "readOne", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "update", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updatePartial", null);
 UserController = __decorate([
     (0, common_1.Controller)('users')
 ], UserController);
