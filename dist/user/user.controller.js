@@ -38,6 +38,11 @@ let UserController = class UserController {
             params
         };
     }
+    async delete(params) {
+        return {
+            params
+        };
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -75,6 +80,13 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updatePartial", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "delete", null);
 UserController = __decorate([
     (0, common_1.Controller)('users')
 ], UserController);
