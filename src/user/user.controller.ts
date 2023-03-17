@@ -24,7 +24,7 @@ export class UserController {
       method: 'put',
       body,
       params
-    }
+    };
   }
 
   @Patch(':id')
@@ -33,13 +33,13 @@ export class UserController {
       method: 'patch',
       body,
       params
-    }
+    };
   }
 
   @Delete(':id')
   async delete(@Param() params) {
     return {
       params
-    }
+    };
   }
 }
