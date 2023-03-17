@@ -1,0 +1,21 @@
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 120,
+  "overrides": [{
+    "files": "*.mjs.js",
+    "options": {
+      "singleQuote": true,
+      "trailingComma": "all",
+      "printWidth": 120
+    }
+  },
+  {
+    "files": "*.snippet.ts",
+    "options": {
+      "singleQuote": true,
+      "trailingComma": "all",
+      "printWidth": 70
+    }
+  }]
+}
