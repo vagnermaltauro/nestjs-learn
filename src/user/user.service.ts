@@ -15,4 +15,8 @@ export class UserService {
       }
     });
   }
+
+  async list() {
+    return this.prisma.users.findMany();
+  }
 }
