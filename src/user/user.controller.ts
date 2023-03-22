@@ -20,7 +20,7 @@ export class UserController {
 
   @Get(':id')
   async readOne(@Param('id', ParseIntPipe) id: number) {
-    return { user: {}, id };
+    return this.userService.listOne(id);
   }
 
   @Put(':id')
