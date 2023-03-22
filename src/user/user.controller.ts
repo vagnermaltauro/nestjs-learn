@@ -29,12 +29,8 @@ export class UserController {
   }
 
   @Patch(':id')
-  async updatePartial(@Body() {email, name, password}: UpdatePatchUserDTO, @Param('id', ParseIntPipe) id: number) {
-    return {
-      method: 'patch',
-      email, name, password,
-      id
-    };
+  async updatePartial(@Body() data: UpdatePatchUserDTO, @Param('id', ParseIntPipe) id: number) {
+    return this.userService.updatePartial(id, data);
   }
 
   @Delete(':id')
