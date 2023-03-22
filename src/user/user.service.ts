@@ -1,3 +1,4 @@
+import { UpdatePutUserDTO } from './dto/update-put-user.dto';
 import { PrismaService } from './../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
@@ -22,6 +23,15 @@ export class UserService {
 
   async listOne(id: number) {
     return this.prisma.users.findUnique({
+      where: {
+        id
+      }
+    });
+  }
+
+  async update(id: number, data: UpdatePutUserDTO) {
+    return this.prisma.users.update({
+      data,
       where: {
         id
       }

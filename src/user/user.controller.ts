@@ -24,12 +24,8 @@ export class UserController {
   }
 
   @Put(':id')
-  async update(@Body() {email, name, password}: UpdatePutUserDTO, @Param('id', ParseIntPipe) id: number) {
-    return {
-      method: 'put',
-      email, name, password,
-      id
-    };
+  async update(@Body() data: UpdatePutUserDTO, @Param('id', ParseIntPipe) id: number) {
+    return this.userService.update(id, data);
   }
 
   @Patch(':id')
