@@ -3,7 +3,6 @@ import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 export class LogInterceptor implements NestInterceptor {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const dt = Date.now();
 
