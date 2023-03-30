@@ -1,7 +1,7 @@
 import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
 import { UpdatePutUserDTO } from './dto/update-put-user.dto';
 import { PrismaService } from './../prisma/prisma.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
 
 @Injectable()
@@ -23,6 +23,8 @@ export class UserService {
   }
 
   async listOne(id: number) {
+    await this.exists(id);
+
     return this.prisma.users.findUnique({
       where: {
         id
@@ -49,10 +51,22 @@ export class UserService {
   }
 
   async delete(id: number) {
+    await this.exists(id);
+
     return this.prisma.users.delete({
       where: {
         id
       }
     });
+  }
+
+  async exists(id: number) {
+    if (!(await this.prisma.users.count({
+      where: {
+        id
+      }
+    }))) {
+      throw new NotFoundException(`ID ${id} not found in db`);
+    }
   }
 }
