@@ -1,6 +1,6 @@
 import { UserService } from './user.service';
 import { CreateUserDTO } from './dto/create-user.dto';
-import { Body, Controller, Post, Get, Param, Put, Patch, Delete, ParseIntPipe, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Post, Get, Put, Patch, Delete, UseInterceptors } from '@nestjs/common';
 import { UpdatePutUserDTO } from './dto/update-put-user.dto';
 import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
 import { LogInterceptor } from 'src/interceptors/log.interceptor';
