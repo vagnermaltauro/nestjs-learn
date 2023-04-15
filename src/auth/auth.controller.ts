@@ -21,6 +21,11 @@ export class AuthController {
     return this.authService.register(body);
   }
 
+  @Post('test-token')
+  async test(@Body() body) {
+    return this.authService.checkToken(body.token);
+  }
+
   @Post('forget')
   async forget(@Body() {email}: AuthForgetDTO) {
     return this.authService.forget(email);
