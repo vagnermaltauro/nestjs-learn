@@ -14,19 +14,21 @@ export class AuthService {
   ) {}
 
   async createToken(user: users) {
-    return this.JWTService.sign({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-    }, {
-      expiresIn: '7 days',
-      subject: String(user.id),
-      issuer: 'API NestJS',
-      audience: 'users',
-    });
+    return {
+      accessToken: this.JWTService.sign({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      }, {
+        expiresIn: '7 days',
+        subject: String(user.id),
+        issuer: 'API NestJS',
+        audience: 'users',
+      }),
+    };
   }
 
-  async checkToken(token: string): Promise<void> {
+  async checkToken(token: string){
     // return this.JWTService.verify();
   }
 
