@@ -13,7 +13,7 @@ export class AuthService {
     private readonly userService: UserService,
   ) {}
 
-  async createToken(user: users) {
+  createToken(user: users) {
     return {
       accessToken: this.JWTService.sign({
         id: user.id,
