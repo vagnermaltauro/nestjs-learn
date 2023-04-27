@@ -1,11 +1,17 @@
 import { UserService } from './user.service';
 import { CreateUserDTO } from './dto/create-user.dto';
-import { Body, Controller, Post, Get, Put, Patch, Delete, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Post, Get, Put, Patch, Delete, UseInterceptors, UseGuards } from '@nestjs/common';
 import { UpdatePutUserDTO } from './dto/update-put-user.dto';
 import { UpdatePatchUserDTO } from './dto/update-patch-user.dto';
 import { LogInterceptor } from 'src/interceptors/log.interceptor';
 import { ParamId } from 'src/decorators/param-id.decorator';
-
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/enums/role.enum';
+import { RoleGuard } from 'src/guards/role.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
+@UseGuards(AuthGuard, RoleGuard)
+@UseInterceptors(LogInterceptor)
+@Roles(Role.Admin)
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
@@ -15,7 +21,6 @@ export class UserController {
     return await this.userService.create(data);
   }
 
-  @UseInterceptors(LogInterceptor)
   @Get()
   async list() {
     return this.userService.list();
