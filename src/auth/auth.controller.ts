@@ -6,9 +6,6 @@ import { AuthForgetDTO } from './dto/auth-forget.dto';
 import { AuthResetDTO } from './dto/auth-reset.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { User } from 'src/decorators/user.decorator';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'src/enums/role.enum';
-import { RoleGuard } from 'src/guards/role.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -16,8 +13,6 @@ export class AuthController {
     private readonly authService: AuthService
   ) {}
 
-  @UseGuards(RoleGuard)
-  @Roles(Role.Admin)
   @Post('login')
   async login(@Body() {email, password}: AuthLoginDTO) {
     return this.authService.login(email, password);
