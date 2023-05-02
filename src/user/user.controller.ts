@@ -9,9 +9,9 @@ import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/enums/role.enum';
 import { RoleGuard } from 'src/guards/role.guard';
 import { AuthGuard } from 'src/guards/auth.guard';
-@UseGuards(AuthGuard, RoleGuard)
+// @UseGuards(AuthGuard, RoleGuard)
 @UseInterceptors(LogInterceptor)
-@Roles(Role.Admin)
+// @Roles(Role.Admin)
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
