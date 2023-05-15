@@ -7,6 +7,8 @@ import { AuthResetDTO } from './dto/auth-reset.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { User } from 'src/decorators/user.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { writeFile } from 'fs/promises';
+import { join } from 'path';
 
 @Controller('auth')
 export class AuthController {
@@ -45,7 +47,8 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Post('photo')
   async uploadPhoto(@User() user, @UploadedFile() photo: Express.Multer.File) {
+    const result = await writeFile(join(__dirname, '..', '..', 'storage', 'photos', `photo-${user.id}.png`), photo.buffer);
 
-    return {user, photo};
+    return {result};
   }
 }
