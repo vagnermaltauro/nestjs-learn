@@ -39,4 +39,11 @@ export class AuthController {
 
     return {user};
   }
+
+  @UseGuards(AuthGuard)
+  @Post('photo')
+  async uploadPhoto(@User() user) {
+
+    return {user};
+  }
 }
