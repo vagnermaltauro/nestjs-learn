@@ -1,15 +1,14 @@
 import { FileService } from './../file/file.service';
 import { AuthService } from './auth.service';
-import { Body, Controller, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Post, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthLoginDTO } from './dto/auth-login.dto';
 import { AuthRegisterDTO } from './dto/auth-register.dto';
 import { AuthForgetDTO } from './dto/auth-forget.dto';
 import { AuthResetDTO } from './dto/auth-reset.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { User } from 'src/decorators/user.decorator';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { join } from 'path';
-
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -51,5 +50,13 @@ export class AuthController {
     const path = join(__dirname, '..', '..', 'storage', 'photos', `photo-${user.id}.png`);
 
     return this.fileService.upload(photo, path);
+  }
+
+  @UseInterceptors(FilesInterceptor('files'))
+  @UseGuards(AuthGuard)
+  @Post('files')
+  async uploadFiles(@User() user, @UploadedFiles() files: Express.Multer.File[]) {
+
+    return files;
   }
 }
