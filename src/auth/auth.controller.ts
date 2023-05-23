@@ -7,7 +7,7 @@ import { AuthForgetDTO } from './dto/auth-forget.dto';
 import { AuthResetDTO } from './dto/auth-reset.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { User } from 'src/decorators/user.decorator';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor, FileFieldsInterceptor } from '@nestjs/platform-express';
 import { join } from 'path';
 @Controller('auth')
 export class AuthController {
@@ -56,6 +56,21 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Post('files')
   async uploadFiles(@User() user, @UploadedFiles() files: Express.Multer.File[]) {
+
+    return files;
+  }
+
+  @UseInterceptors(FileFieldsInterceptor([{
+    name: 'photo',
+    maxCount: 1
+  },
+  {
+    name: 'documents',
+    maxCount: 2,
+  }]))
+  @UseGuards(AuthGuard)
+  @Post('files-fields')
+  async uploadFilesFields(@User() user, @UploadedFiles() files: {photo: Express.Multer.File, documents: Express.Multer.File[]}) {
 
     return files;
   }
