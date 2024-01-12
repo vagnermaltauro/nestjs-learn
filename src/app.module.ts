@@ -24,4 +24,5 @@ import { ConfigModule } from '@nestjs/config';
   }],
   exports: [],
 })
-export class AppModule {}
+export class AppModule { }
+
